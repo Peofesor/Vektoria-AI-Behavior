@@ -2,21 +2,19 @@
 #include "SteeringDynamic.h"
 #include "KnowledgeKinematicGroup.h"
 
-class SteeringBehaviorDynamicVELOCITYMATCHING :
+class SteeringBehaviorDynamicCOHESION :
     public SteeringDynamic
 {
 private:
     KnowledgeKinematicGroup* m_buddies;
-    float m_activationDistance = 15.0f;
+	float m_activationDistance = 15.0f;
 
 public:
-    SteeringBehaviorDynamicVELOCITYMATCHING() = default;
-    ~SteeringBehaviorDynamicVELOCITYMATCHING() override = default;
-
+    SteeringBehaviorDynamicCOHESION() = default;
+    ~SteeringBehaviorDynamicCOHESION() override = default;
     SteeringForce getForce() override;
-
     void setBuddies(KnowledgeKinematicGroup* buddies);
     void setActicationDistance(float ad);
-    void Update() override {};
+	void Update() override {};
 };
 

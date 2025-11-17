@@ -43,6 +43,8 @@
 #include "SteeringBehaviorKinematicSEEK.h"
 
 #include "SteeringBehaviorDynamicVELOCITYMATCHING.h"
+#include "SteeringBehaviorDynamicCOHESION.h"
+#include "SteeringBevahiorDynamicSEPARATION.h"
 
 using namespace Vektoria;
 

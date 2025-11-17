@@ -234,7 +234,29 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		{
 			auto* velocityMatching = new SteeringBehaviorDynamicVELOCITYMATCHING();
 			velocityMatching->setBuddies(&m_buddiesRed);
-			velocityMatching->setActicationDistance(6.0f);
+			//velocityMatching->setActicationDistance(6.0f);
+
+			npc.SetSteeringBehavior(velocityMatching);
+
+			// Zufällige Richtung
+			CHVector dir = CHVector(
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				0.0f
+			);
+			dir.Norm();
+
+			// Zufällige Geschwindigkeit
+			float speed = Random::gleichVerteilungFloat(5.0f, 15.0f);
+
+			// Kinematics direkt setzen
+			npc.GetKinematics()->m_movementVelocity = dir * speed;
+		}
+		for (auto& npc : m_NpcBlue)
+		{
+			auto* velocityMatching = new SteeringBehaviorDynamicVELOCITYMATCHING();
+			velocityMatching->setBuddies(&m_buddiesBlue);
+			//velocityMatching->setActicationDistance(6.0f);
 
 			npc.SetSteeringBehavior(velocityMatching);
 
@@ -252,27 +274,16 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			// Kinematics direkt setzen
 			npc.GetKinematics()->m_movementVelocity = dir * speed;
 		}
-		for (auto& npc : m_NpcBlue)
+	}
+
+	if (m_dk.KeyDown(DIK_Z)) // SEPARATION RED
+	{
+		for (auto& npc : m_NpcRed)
 		{
-			auto* velocityMatching = new SteeringBehaviorDynamicVELOCITYMATCHING();
-			velocityMatching->setBuddies(&m_buddiesBlue);
-			velocityMatching->setActicationDistance(6.0f);
-
-			npc.SetSteeringBehavior(velocityMatching);
-
-			// Zufällige Richtung
-			CHVector dir = CHVector(
-				Random::gleichVerteilungFloat(-1.0f, 1.0f),
-				Random::gleichVerteilungFloat(-1.0f, 1.0f),
-				0.0f
-			);
-			dir.Norm();
-
-			// Zufällige Geschwindigkeit
-			float speed = Random::gleichVerteilungFloat(1.0f, 10.0f);
-
-			// Kinematics direkt setzen
-			npc.GetKinematics()->m_movementVelocity = dir * speed;
+			auto* separation = new SteeringBevahiorDynamicSEPARATION();
+			separation->setBuddies(&m_buddiesRed);
+			separation->setActicationDistance(5.0f);
+			npc.SetSteeringBehavior(separation);
 		}
 	}
 }

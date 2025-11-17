@@ -75,6 +75,12 @@
     <ClInclude Include="KnowledgeKinematicGroup.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicCOHESION.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBevahiorDynamicSEPARATION.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -132,6 +138,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="KnowledgeKinematicGroup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicCOHESION.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBevahiorDynamicSEPARATION.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
