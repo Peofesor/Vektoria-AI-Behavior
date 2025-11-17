@@ -69,6 +69,12 @@
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicVELOCITYMATCHING.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeKinematicGroup.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -120,6 +126,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicVELOCITYMATCHING.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeKinematicGroup.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,10 +5,10 @@
 class SteeringDynamic : public SteeringBehavior
 {
 public:
-	~SteeringDynamic();
-	SteeringDynamic();
+	SteeringDynamic() {};
+	virtual ~SteeringDynamic() {};
 
-	SteeringForce getForce();
-	void update();
+	virtual SteeringForce getForce() = 0;
+	virtual void Update() = 0;
 };
 

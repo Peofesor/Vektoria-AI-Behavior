@@ -1,17 +1,21 @@
 #pragma once
 #include "Vektoria\Root.h"
+#include "Option.h"
+
 using namespace Vektoria;
 
 class Kinematics;
 
-class SteeringBehavior
+class SteeringBehavior : public Option
 {
 public:
 	SteeringBehavior();
 	~SteeringBehavior();
 
 	Kinematics* GetKinematics() const { return m_kinematics; }
-	virtual void Update() = 0;
+	void setKinematics(Kinematics* kinematics) { m_kinematics = kinematics; }
+
+	virtual void Update() {};
 
 	//chvector angletodirectionvector();
 	//void directionvectortoangle();
@@ -26,8 +30,6 @@ public:
 
 protected:
 	Kinematics* m_kinematics;
-
-private:
 	bool m_lookIntoMoveDirection;
 	CHVector m_standardForce;
 

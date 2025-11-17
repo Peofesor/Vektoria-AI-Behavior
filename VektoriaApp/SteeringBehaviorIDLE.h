@@ -4,7 +4,7 @@
 class SteeringBehaviorIDLE : public SteeringBehavior
 {
 public:
-    void Update() override
+    void UpdateVelocity()
     {
         // macht absichtlich nichts
     }

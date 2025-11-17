@@ -37,8 +37,12 @@
 #include "Random.h"
 #include "OptionTextOutput.h"
 #include "KnowledgePosition.h"
+#include "KnowledgeKinematicGroup.h"
+
 #include "SteeringBehaviorKinematicFLEE.h"
 #include "SteeringBehaviorKinematicSEEK.h"
+
+#include "SteeringBehaviorDynamicVELOCITYMATCHING.h"
 
 using namespace Vektoria;
 
@@ -104,4 +108,7 @@ private:
 	bool m_kinematicsActive = false;
 
 	KnowledgePosition m_knowledgePosition;
+
+	KnowledgeKinematicGroup m_buddiesRed;
+	KnowledgeKinematicGroup m_buddiesBlue;
 };

@@ -1,4 +1,6 @@
 #include "Npc.h"
+#include "SteeringDynamic.h"
+#include "SteeringKinematic.h"
 
 Npc::Npc()
 {
@@ -6,11 +8,17 @@ Npc::Npc()
 	m_steeringBehavior = idle;
 }
 
-void Npc::Init(CHVector pos) {
-	// Position setzen zu s
+Npc::~Npc()
+{
+	delete m_steeringBehavior;
+}
+
+void Npc::Init(CHVector pos) 
+{
+	// Position setzen
 	Translate(pos);
 
-	m_steeringBehavior->GetKinematics()->SetCurrentPosition(pos);
+	m_steeringBehavior->GetKinematics()->SetPosition(pos);
 
 	// Init Geo
 	m_zgSphere.Init(1.5f, &m_zmSphere);
@@ -31,17 +39,66 @@ void Npc::Init(CHVector pos) {
 
 void Npc::Tick(float fTimeDelta)
 {
-	// Velocity setzten
-	if (m_steeringBehavior)
+	if (!m_steeringBehavior)
+		return;
+
+	// Unterscheide zwischen Kinematic und Dynamic
+	SteeringDynamic* dynamicBehavior = dynamic_cast<SteeringDynamic*>(m_steeringBehavior);
+	SteeringKinematic* kinematicBehavior = dynamic_cast<SteeringKinematic*>(m_steeringBehavior);
+
+	// Aktualisiere Geschwindigkeit
+	// DYNAMIC
+	if (dynamicBehavior)
 	{
-		m_steeringBehavior->Update();
+		// Hole Kraft
+		SteeringForce force = dynamicBehavior->getForce();
+
+		// Beschleunigung berechnen
+		CHVector acceleration = CHVector(
+			force.m_movementForce.x,
+			force.m_movementForce.y, 
+			0);
+
+		CHVector currentVelocity = GetKinematics()->m_movementVelocity;
+		CHVector newVelocity = currentVelocity + acceleration * fTimeDelta;
+
+		// Limitieren der Geschwindigkeit
+		float speed = newVelocity.Length();
+		if (speed > GetKinematics()->m_maxMovementVelocity)
+		{
+			newVelocity.Norm();
+			newVelocity *= GetKinematics()->m_maxMovementVelocity;
+		}
+
+		GetKinematics()->m_movementVelocity = newVelocity;
 	}
 
-	// Kinematik updaten
-	m_steeringBehavior->GetKinematics()->UpdateKinematik(fTimeDelta);
+	// KINEMATIC
+	else if (kinematicBehavior)
+	{
+		kinematicBehavior->UpdateVelocity();
+	}
+
+	// Position updaten
+	GetKinematics()->UpdateKinematik(fTimeDelta);
 
 	// Neue Position setzen
-	Translate(m_steeringBehavior->GetKinematics()->GetCurrentPosition());
+	Translate(GetKinematics()->GetPosition());
+
+	//// Ausrichtung
+	//RotateZDelta(GetKinematics()->m_orientation);
+
+	//// Velocity setzten
+	//if (m_steeringBehavior)
+	//{
+	//	m_steeringBehavior->Update();
+	//}
+
+	//// Kinematik updaten
+	//m_steeringBehavior->GetKinematics()->UpdateKinematik(fTimeDelta);
+
+	//// Neue Position setzen
+	//Translate(m_steeringBehavior->GetKinematics()->GetPosition());
 }
 
 void Npc::SetColor(CColor color)
@@ -53,11 +110,18 @@ void Npc::SetColor(CColor color)
 void Npc::SetSteeringBehavior(SteeringBehavior* sb)
 {
 	// Alte pos kopieren
-	auto pos = m_steeringBehavior->GetKinematics()->GetCurrentPosition();
+	auto pos = GetKinematics()->GetPosition();
 	
 	delete m_steeringBehavior;
 	m_steeringBehavior = sb;
 
-	// Pos wieder setzten
-	m_steeringBehavior->GetKinematics()->SetCurrentPosition(pos);
+	//// Pos wieder setzten
+	GetKinematics()->SetPosition(pos);
+	// Kinematics zuweisen
+	m_steeringBehavior->setKinematics(GetKinematics());
+}
+
+Kinematics* Npc::GetKinematics()
+{
+	return m_steeringBehavior->GetKinematics();
 }

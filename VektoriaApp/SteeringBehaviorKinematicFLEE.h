@@ -10,7 +10,7 @@ public:
 	//~SteeringBehaviorKinematicFLEE();
 
 	void setTarget(KnowledgePosition* target) { m_target = target; };
-	void Update();
+	void UpdateVelocity();
 
 private:
 	KnowledgePosition* m_target;

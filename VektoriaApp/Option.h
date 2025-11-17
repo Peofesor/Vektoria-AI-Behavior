@@ -14,14 +14,10 @@ public:
 	virtual void Stoppen();
 	virtual void Pausieren();
 
-	void Update(float dt);
-	
 	float m_dauer;
 	float m_originaldauer;
 	float m_cooldown;
 	Status m_status;
 
 	float m_startTime;
-
-private:
 };

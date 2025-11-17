@@ -3,8 +3,12 @@
 
 class Knowledge
 {	
+protected:
+	std::string m_name;
 public:
-	//Knowledge(std::string name);
-	//~Knowledge();
+	Knowledge(std::string name) { m_name = name; };
+	Knowledge() {};
+
+	virtual ~Knowledge() {};
 };
 

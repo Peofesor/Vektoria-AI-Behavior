@@ -5,7 +5,8 @@ class SteeringKinematic : public SteeringBehavior
 {
 public:
 	//SteeringKinematic();
-	//~SteeringKinematic();
-	//virtual CHVector updateVelocity();
+	virtual ~SteeringKinematic() {};
+
+	virtual void UpdateVelocity() = 0;
 };
 

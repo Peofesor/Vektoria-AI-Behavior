@@ -87,8 +87,9 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 		npc.Init(pos);
 
 		m_zs.AddPlacement(&npc);
-
 		npc.SetColor(CColor(1.0f, 0.0f, 0.0f));
+
+		m_buddiesRed.addBoid(npc.GetKinematics());
 	}
 
 	for (auto& npc : m_NpcBlue)
@@ -99,6 +100,8 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 		m_zs.AddPlacement(&npc);
 
 		npc.SetColor(CColor(0.0f, 0.0f, 1.0f));
+
+		m_buddiesBlue.addBoid(npc.GetKinematics());
 	}
 
 	//--------------------------------
@@ -143,13 +146,13 @@ void CGame::Tick(float fTime, float fTimeDelta)
 {
 	option.Update(fTimeDelta);
 
+	// Knowledge Updaten
 	CHVector targetPos = m_pTarget.GetPos();
-
 	m_knowledgePosition.SetPosition(targetPos);
 
+	// NPCs updaten
 	if (m_kinematicsActive)
 	{
-		// NPCs updaten
 		for (auto& npc : m_NpcRed)
 		{
 			//npc.SetTarget(targetPos);
@@ -222,6 +225,54 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		{
 			auto* seek = new SteeringBehaviorIDLE();
 			npc.SetSteeringBehavior(seek);
+		}
+	}
+
+	if (m_dk.KeyDown(DIK_T)) // VELOCITY MATCHING
+	{
+		for (auto& npc : m_NpcRed)
+		{
+			auto* velocityMatching = new SteeringBehaviorDynamicVELOCITYMATCHING();
+			velocityMatching->setBuddies(&m_buddiesRed);
+			velocityMatching->setActicationDistance(6.0f);
+
+			npc.SetSteeringBehavior(velocityMatching);
+
+			// Zufällige Richtung
+			CHVector dir = CHVector(
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				0.0f
+			);
+			dir.Norm();
+
+			// Zufällige Geschwindigkeit
+			float speed = Random::gleichVerteilungFloat(1.0f, 10.0f);
+
+			// Kinematics direkt setzen
+			npc.GetKinematics()->m_movementVelocity = dir * speed;
+		}
+		for (auto& npc : m_NpcBlue)
+		{
+			auto* velocityMatching = new SteeringBehaviorDynamicVELOCITYMATCHING();
+			velocityMatching->setBuddies(&m_buddiesBlue);
+			velocityMatching->setActicationDistance(6.0f);
+
+			npc.SetSteeringBehavior(velocityMatching);
+
+			// Zufällige Richtung
+			CHVector dir = CHVector(
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				Random::gleichVerteilungFloat(-1.0f, 1.0f),
+				0.0f
+			);
+			dir.Norm();
+
+			// Zufällige Geschwindigkeit
+			float speed = Random::gleichVerteilungFloat(1.0f, 10.0f);
+
+			// Kinematics direkt setzen
+			npc.GetKinematics()->m_movementVelocity = dir * speed;
 		}
 	}
 }

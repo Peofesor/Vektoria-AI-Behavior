@@ -1,14 +1,16 @@
 #include "SteeringBehaviorKinematicSEEK.h"
 
-void SteeringBehaviorKinematicSEEK::Update()
+void SteeringBehaviorKinematicSEEK::UpdateVelocity()
 {
-	if (!m_target) return;
+	if (!m_target || !m_kinematics) 
+		return;
 
-	CHVector toTarget = m_target->GetPosition() - this->GetKinematics()->GetCurrentPosition();
+	CHVector targetDirection = m_target->GetPosition() - this->GetKinematics()->GetPosition();
 
-	toTarget.z = 0.0f; // Bewegung nur in X-Y Ebene
-	toTarget.Normal();
+	targetDirection.z = 0.0f; // Bewegung nur in X-Y Ebene
+	targetDirection.Normal();
 
-	CHVector steeringVelocity = toTarget * this->GetKinematics()->m_maxMovementVelocity;
+	CHVector steeringVelocity = targetDirection * this->GetKinematics()->m_maxMovementVelocity;
+
 	this->GetKinematics()->m_movementVelocity = steeringVelocity;
 }

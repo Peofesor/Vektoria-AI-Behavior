@@ -6,15 +6,15 @@ using namespace Vektoria;
 class SteeringForce
 {
 public:
+	CHVector m_movementForce;
+	float m_rotationForce;
+
 	SteeringForce(CHVector a_movementForce, float a_rotationForce)
 	{
 		m_movementForce = a_movementForce;
 		m_rotationForce = a_rotationForce;
 	}
-	SteeringForce();
-
-	CHVector m_movementForce;
-	float m_rotationForce;
+	SteeringForce() {};
 
 	SteeringForce operator+=(const SteeringForce& other)
 	{
