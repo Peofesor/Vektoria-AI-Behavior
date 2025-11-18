@@ -20,7 +20,7 @@ public:
 	//void SetTarget(CHVector& targetPos);
 
 	void SetSteeringBehavior(SteeringBehavior* sb);
-	Kinematics* GetKinematics();
+	Kinematics* GetKinematics() { return &m_kinematics; };
 
 private:
 	CGeoSphere m_zgSphere;
@@ -31,7 +31,7 @@ private:
 	CMaterial m_zmSphere;
 	CMaterial m_zmSphereNose;
 
-	//Kinematics m_kinematics;
 	SteeringBehavior* m_steeringBehavior = nullptr;
+	Kinematics m_kinematics;
 
 };

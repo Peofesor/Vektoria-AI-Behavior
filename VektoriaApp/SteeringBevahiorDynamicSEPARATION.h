@@ -7,7 +7,7 @@ class SteeringBevahiorDynamicSEPARATION :
 {
 private:
     KnowledgeKinematicGroup* m_buddies;
-	float m_activationDistance = 15.0f;
+	float m_activationDistance = 10.0f;
 
 public:
     SteeringBevahiorDynamicSEPARATION() = default;

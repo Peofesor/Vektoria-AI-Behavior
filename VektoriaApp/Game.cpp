@@ -182,6 +182,8 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	if (m_dk.KeyDown(DIK_E)) // FLEE
 	{
+		LogDebug("Flee aktiviert");
+
 		m_kinematicsActive = true;
 
 		for (auto& npc : m_NpcRed)
@@ -199,6 +201,8 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	}
 	if (m_dk.KeyDown(DIK_Q)) // SEEK
 	{
+		LogDebug("Seek aktiviert");
+
 		m_kinematicsActive = true;
 
 		for (auto& npc : m_NpcRed)
@@ -278,12 +282,17 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	if (m_dk.KeyDown(DIK_Z)) // SEPARATION RED
 	{
+		LogDebug("Separation aktiviert für roten NPC");
+		
 		for (auto& npc : m_NpcRed)
 		{
 			auto* separation = new SteeringBevahiorDynamicSEPARATION();
 			separation->setBuddies(&m_buddiesRed);
-			separation->setActicationDistance(5.0f);
+			separation->setActicationDistance(10.0f);
 			npc.SetSteeringBehavior(separation);
+
+			npc.GetKinematics()->m_movementVelocity = CHVector(0.0f, 0.0f, 0.0f);
+			
 		}
 	}
 }

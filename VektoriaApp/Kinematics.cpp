@@ -2,7 +2,17 @@
 
 Kinematics::Kinematics()
 {
+	m_position = CHVector(0.0f, 0.0f, 0.0f);
+	m_movementVelocity = CHVector(0.0f, 0.0f, 0.0f);
+	
+	m_orientation = 0.0f;
+	m_rotationVelocity = 0.0f;
+
 	m_maxMovementVelocity = 10.0f;
+	m_maxMovementForce = 200.0f;
+	m_maxRotationVelocity = 1.0f;
+	m_maxRotationForce = 1.0f;
+	
 }
 
 /// <summary>
@@ -15,5 +25,5 @@ void Kinematics::UpdateKinematik(float fTimeDelta)
 
 	m_position.z = -90.0f; // Bewegung nur in X-Y Ebene
 
-	m_orientation = atan2f(m_movementVelocity.y, m_movementVelocity.x);
+	m_orientation += m_rotationVelocity * fTimeDelta;
 }

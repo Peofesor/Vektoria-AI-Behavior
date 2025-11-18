@@ -2,11 +2,10 @@
 #include "Kinematics.h"
 
 SteeringBehavior::SteeringBehavior()
-    : m_kinematics(new Kinematics())
+    : m_kinematics(nullptr)
 {
 }
 
 SteeringBehavior::~SteeringBehavior()
 {
-    delete m_kinematics;
 }
