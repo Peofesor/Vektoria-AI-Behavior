@@ -1,16 +1,16 @@
 #include "SteeringBevahiorDynamicSEPARATION.h"
 
-void SteeringBevahiorDynamicSEPARATION::setBuddies(KnowledgeKinematicGroup* buddies)
+void SteeringBehaviorDynamicSEPARATION::setBuddies(KnowledgeKinematicGroup* buddies)
 {
 	m_buddies = buddies;
 }
 
-void SteeringBevahiorDynamicSEPARATION::setActicationDistance(float ad)
+void SteeringBehaviorDynamicSEPARATION::setActicationDistance(float ad)
 {
 	m_activationDistance = ad;
 }
 
-SteeringForce SteeringBevahiorDynamicSEPARATION::getForce()
+SteeringForce SteeringBehaviorDynamicSEPARATION::getForce()
 {
 	SteeringForce aSteeringForce;
 
@@ -20,8 +20,6 @@ SteeringForce SteeringBevahiorDynamicSEPARATION::getForce()
 
 	if (m_buddies->size() == 0)
 		return aSteeringForce;
-
-	int neighborsFound = 0;
 
 	// Durchlaufe alle buddies
 	for (size_t i = 0; i < m_buddies->size(); i++)

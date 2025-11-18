@@ -77,8 +77,8 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	// Plane
 	m_zs.AddPlacement(&m_pPlane);
 
-	float gridSizeX = 35.0f;
-	float gridSizeY = 15.0f;
+	float gridSizeX = 50.0f;
+	float gridSizeY = 25.0f;
 
 	// NPCs
 	for (auto& npc : m_NpcRed)
@@ -140,6 +140,10 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	//	normalFile << val << ",";
 	//}
 	//normalFile.close();
+
+	testNpc.Init(CHVector(50.0f, 25.0f, -90.0f));
+	m_zs.AddPlacement(&testNpc);
+	testNpc.SetColor(CColor(0.0f, 1.0f, 0.0f));
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
@@ -286,7 +290,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		
 		for (auto& npc : m_NpcRed)
 		{
-			auto* separation = new SteeringBevahiorDynamicSEPARATION();
+			auto* separation = new SteeringBehaviorDynamicSEPARATION();
 			separation->setBuddies(&m_buddiesRed);
 			separation->setActicationDistance(10.0f);
 			npc.SetSteeringBehavior(separation);
@@ -294,6 +298,19 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			npc.GetKinematics()->m_movementVelocity = CHVector(0.0f, 0.0f, 0.0f);
 			
 		}
+	}
+
+	if (m_dk.KeyDown(DIK_F))  // FLOCKING BLUE
+	{
+		LogDebug("Flocking aktiviert Red");
+
+		for (auto& npc : m_NpcRed)
+		{
+			auto* flocking = new SteeringBehaviorDynamicFLOCKING();
+			flocking->setBuddies(&m_buddiesRed);
+			npc.SetSteeringBehavior(flocking);
+		}
+		
 	}
 }
 

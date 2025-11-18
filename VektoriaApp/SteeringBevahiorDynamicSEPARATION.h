@@ -2,7 +2,7 @@
 #include "SteeringDynamic.h"
 #include "KnowledgeKinematicGroup.h"
 
-class SteeringBevahiorDynamicSEPARATION :
+class SteeringBehaviorDynamicSEPARATION :
     public SteeringDynamic
 {
 private:
@@ -10,8 +10,8 @@ private:
 	float m_activationDistance = 10.0f;
 
 public:
-    SteeringBevahiorDynamicSEPARATION() = default;
-    ~SteeringBevahiorDynamicSEPARATION() override = default;
+    SteeringBehaviorDynamicSEPARATION() = default;
+    ~SteeringBehaviorDynamicSEPARATION() override = default;
 
     SteeringForce getForce() override;
 

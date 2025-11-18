@@ -81,6 +81,9 @@
     <ClInclude Include="SteeringBevahiorDynamicSEPARATION.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicFLOCKING.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -144,6 +147,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBevahiorDynamicSEPARATION.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicFLOCKING.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

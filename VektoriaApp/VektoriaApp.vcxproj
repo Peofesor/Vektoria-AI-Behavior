@@ -166,6 +166,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="SteeringBehaviorDynamicCOHESION.h" />
+    <ClInclude Include="SteeringBehaviorDynamicFLOCKING.h" />
     <ClInclude Include="SteeringBehaviorDynamicVELOCITYMATCHING.h" />
     <ClInclude Include="SteeringBehaviorIDLE.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicCOHESION.cpp" />
+    <ClCompile Include="SteeringBehaviorDynamicFLOCKING.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicVELOCITYMATCHING.cpp" />
     <ClCompile Include="SteeringBehaviorIDLE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />

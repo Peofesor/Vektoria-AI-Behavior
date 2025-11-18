@@ -45,6 +45,7 @@
 #include "SteeringBehaviorDynamicVELOCITYMATCHING.h"
 #include "SteeringBehaviorDynamicCOHESION.h"
 #include "SteeringBevahiorDynamicSEPARATION.h"
+#include "SteeringBehaviorDynamicFLOCKING.h"
 
 using namespace Vektoria;
 
@@ -90,7 +91,7 @@ private:
 	CPlacement m_pPlane;
 	CGeoQuad m_gPlane;
 
-	Npc m_NpcRed[10];
+	Npc m_NpcRed[40];
 	Npc m_NpcBlue[10];
 
 	CPlacement pNpc;
@@ -113,4 +114,7 @@ private:
 
 	KnowledgeKinematicGroup m_buddiesRed;
 	KnowledgeKinematicGroup m_buddiesBlue;
+
+
+	Npc testNpc;
 };
