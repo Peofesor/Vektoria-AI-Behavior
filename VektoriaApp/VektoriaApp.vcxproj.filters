@@ -84,6 +84,30 @@
     <ClInclude Include="SteeringBehaviorDynamicFLOCKING.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="DecisionTreeReasoner.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeDT.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionNodeDT.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionNodeDT.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsiderationBoolean.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="BooleanNodeDT.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ZombieUtils.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorKinematicWANDER.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -150,6 +174,30 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBehaviorDynamicFLOCKING.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionTreeReasoner.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeDT.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionNodeDT.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionNodeDT.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsiderationBoolean.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="BooleanNodeDT.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ZombieUtils.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorKinematicWANDER.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,13 +1,14 @@
 #include "OptionTextOutput.h"
-OptionTextOutput::OptionTextOutput(float dauer_sec, float cooldown_sec)
-	: Option(dauer_sec, cooldown_sec)
+
+OptionTextOutput::OptionTextOutput(std::string name, float dauer_sec, float cooldown_sec)
+	: Option(dauer_sec, cooldown_sec), m_name(name)
 {
 }
 
 void OptionTextOutput::Starten()
 {
 	Option::Starten();
-	printf("Option gestartet mit Dauer: %.2f\n", m_dauer);
+	printf("Option gestartet mit Dauer: %.2f\n", m_name.c_str(), m_dauer);
 }
 
 void OptionTextOutput::Update(float fTimeDelta)
@@ -25,7 +26,7 @@ void OptionTextOutput::Update(float fTimeDelta)
 		}
 		else
 		{
-			printf("Verbleibende Dauer: %.2f\n", m_dauer);
+			//printf("Verbleibende Dauer: %.2f\n", m_dauer);
 		}
 	}
 }
@@ -38,7 +39,7 @@ void OptionTextOutput::Stoppen()
 
 void OptionTextOutput::Pausieren()
 {
-	printf("Option pausiert bei Dauer: %.2f\n", m_dauer);
+	printf("Option pausiert: ", m_name.c_str());
 	Option::Pausieren();
 
 }

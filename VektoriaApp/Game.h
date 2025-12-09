@@ -47,6 +47,16 @@
 #include "SteeringBevahiorDynamicSEPARATION.h"
 #include "SteeringBehaviorDynamicFLOCKING.h"
 
+// Decision Tree System (Die Basis-Klassen)
+#include "DecisionTreeReasoner.h"
+#include "BooleanNodeDT.h"       // Der Ja/Nein Knoten
+#include "OptionNodeDT.h"       // Der Blatt-Knoten
+#include "OptionTextOutput.h"   // Deine Option Klasse
+
+// Zombie Logik
+#include "ZombieUtils.h"
+
+
 using namespace Vektoria;
 
 class CGame
@@ -92,7 +102,7 @@ private:
 	CGeoQuad m_gPlane;
 
 	Npc m_NpcRed[40];
-	Npc m_NpcBlue[10];
+	Npc m_NpcBlue[40];
 
 	CPlacement pNpc;
 	CGeoSphere gNpc;
@@ -117,4 +127,25 @@ private:
 
 
 	Npc testNpc;
+
+
+	// --- ZOMBIE AI VARIABLEN ---
+	DecisionTreeReasoner* m_zombieReasoner;
+	bool m_isDay; // Globale Spielvariable: Ist es Tag?
+
+	// 1. Die Optionen (Aktionen)
+	ZombieOption* m_optSleep;
+	ZombieOption* m_optHunt;
+	ZombieOption* m_optWander;
+
+	// 2. Die Baum-Knoten (Nodes)
+	BooleanNodeDT* m_rootDayCheck;        // Wurzel
+	BooleanNodeDT* m_nodePlayerNearCheck; // Entscheidung
+	OptionNodeDT* m_leafSleep;           // Blatt
+	OptionNodeDT* m_leafHunt;            // Blatt
+	OptionNodeDT* m_leafWander;          // Blatt
+
+	// 3. Die Bedingungen (Considerations)
+	ConsiderationIsDay* m_condDay;
+	ConsiderationPlayerNear* m_condNear;
 };

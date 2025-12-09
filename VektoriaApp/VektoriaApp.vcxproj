@@ -153,13 +153,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BooleanNodeDT.h" />
+    <ClInclude Include="ConsiderationBoolean.h" />
+    <ClInclude Include="DecisionNodeDT.h" />
+    <ClInclude Include="DecisionTreeReasoner.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="Knowledge.h" />
     <ClInclude Include="KnowledgeKinematicGroup.h" />
     <ClInclude Include="KnowledgePosition.h" />
+    <ClInclude Include="NodeDT.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Option.h" />
+    <ClInclude Include="OptionNodeDT.h" />
     <ClInclude Include="OptionTextOutput.h" />
     <ClInclude Include="Perlin.h" />
     <ClInclude Include="Random.h" />
@@ -171,20 +177,28 @@
     <ClInclude Include="SteeringBehaviorIDLE.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
+    <ClInclude Include="SteeringBehaviorKinematicWANDER.h" />
     <ClInclude Include="SteeringBevahiorDynamicSEPARATION.h" />
     <ClInclude Include="SteeringDynamic.h" />
     <ClInclude Include="SteeringForce.h" />
     <ClInclude Include="SteeringKinematic.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ZombieUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BooleanNodeDT.cpp" />
+    <ClCompile Include="ConsiderationBoolean.cpp" />
+    <ClCompile Include="DecisionNodeDT.cpp" />
+    <ClCompile Include="DecisionTreeReasoner.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kinematics.cpp" />
     <ClCompile Include="Knowledge.cpp" />
     <ClCompile Include="KnowledgeKinematicGroup.cpp" />
     <ClCompile Include="KnowledgePosition.cpp" />
+    <ClCompile Include="NodeDT.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Option.cpp" />
+    <ClCompile Include="OptionNodeDT.cpp" />
     <ClCompile Include="OptionTextOutput.cpp" />
     <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -195,11 +209,13 @@
     <ClCompile Include="SteeringBehaviorIDLE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
+    <ClCompile Include="SteeringBehaviorKinematicWANDER.cpp" />
     <ClCompile Include="SteeringBevahiorDynamicSEPARATION.cpp" />
     <ClCompile Include="SteeringDynamic.cpp" />
     <ClCompile Include="SteeringForce.cpp" />
     <ClCompile Include="SteeringKinematic.cpp" />
     <ClCompile Include="VektoriaApp.cpp" />
+    <ClCompile Include="ZombieUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VektoriaTest.ico" />

@@ -21,11 +21,11 @@ void Npc::Init(CHVector pos)
 	Translate(pos);
 
 	// Init Geo
-	m_zgSphere.Init(1.0f, &m_zmSphere);
-	m_zgSphereNose.Init(0.5f, &m_zmSphereNose);
+	m_zgSphere.Init(0.5f, &m_zmSphere);
+	m_zgSphereNose.Init(0.2f, &m_zmSphereNose);
 
 	// Nase verschieben
-	m_zpSphereNose.TranslateXDelta(1.0f);
+	m_zpSphereNose.TranslateXDelta(0.5f);
 
 	// Placements zuweisen
 	AddPlacement(&m_zpSphereNose);

@@ -1,5 +1,15 @@
 #include "SteeringBehaviorDynamicVELOCITYMATCHING.h"
 
+void SteeringBehaviorDynamicVELOCITYMATCHING::setBuddies(KnowledgeKinematicGroup* buddies)
+{
+    m_buddies = buddies;
+}
+
+void SteeringBehaviorDynamicVELOCITYMATCHING::setActicationDistance(float ad)
+{
+    m_activationDistance = ad;
+}
+
 SteeringForce SteeringBehaviorDynamicVELOCITYMATCHING::getForce()
 {
     SteeringForce aSteeringForce;
@@ -42,12 +52,3 @@ SteeringForce SteeringBehaviorDynamicVELOCITYMATCHING::getForce()
     return aSteeringForce;
 }
 
-void SteeringBehaviorDynamicVELOCITYMATCHING::setBuddies(KnowledgeKinematicGroup* buddies)
-{
-    m_buddies = buddies;
-}
-
-void SteeringBehaviorDynamicVELOCITYMATCHING::setActicationDistance(float ad)
-{
-    m_activationDistance = ad;
-}
