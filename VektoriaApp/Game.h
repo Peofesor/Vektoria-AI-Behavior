@@ -47,6 +47,10 @@
 #include "SteeringBevahiorDynamicSEPARATION.h"
 #include "SteeringBehaviorDynamicFLOCKING.h"
 
+#include "OptionSteeringBehavior.h"
+#include "SteeringBehaviorKinematicWANDER.h"
+#include "SteeringBehaviorDynamicWANDER.h"
+
 // Decision Tree System (Die Basis-Klassen)
 #include "DecisionTreeReasoner.h"
 #include "BooleanNodeDT.h"       // Der Ja/Nein Knoten
@@ -101,6 +105,11 @@ private:
 	CPlacement m_pPlane;
 	CGeoQuad m_gPlane;
 
+	CPlacement m_pSleepPlane;
+	CGeoQuad m_gSleepPlane;
+	CMaterial m_zmSleepPlane;
+
+
 	Npc m_NpcRed[40];
 	Npc m_NpcBlue[40];
 
@@ -148,4 +157,12 @@ private:
 	// 3. Die Bedingungen (Considerations)
 	ConsiderationIsDay* m_condDay;
 	ConsiderationPlayerNear* m_condNear;
+
+	SteeringBehaviorKinematicSEEK* m_seekSleep;
+	SteeringBehaviorKinematicSEEK* m_seekHunt;
+	SteeringBehaviorDynamicWANDER* m_wander;
+
+
+	KnowledgePosition* m_sleepPosition;
+	KnowledgePosition* m_huntTarget;
 };

@@ -166,6 +166,7 @@
     <ClInclude Include="Npc.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="OptionNodeDT.h" />
+    <ClInclude Include="OptionSteeringBehavior.h" />
     <ClInclude Include="OptionTextOutput.h" />
     <ClInclude Include="Perlin.h" />
     <ClInclude Include="Random.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="SteeringBehaviorDynamicCOHESION.h" />
     <ClInclude Include="SteeringBehaviorDynamicFLOCKING.h" />
     <ClInclude Include="SteeringBehaviorDynamicVELOCITYMATCHING.h" />
+    <ClInclude Include="SteeringBehaviorDynamicWANDER.h" />
     <ClInclude Include="SteeringBehaviorIDLE.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="OptionNodeDT.cpp" />
+    <ClCompile Include="OptionSteeringBehavior.cpp" />
     <ClCompile Include="OptionTextOutput.cpp" />
     <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -206,6 +209,7 @@
     <ClCompile Include="SteeringBehaviorDynamicCOHESION.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicFLOCKING.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicVELOCITYMATCHING.cpp" />
+    <ClCompile Include="SteeringBehaviorDynamicWANDER.cpp" />
     <ClCompile Include="SteeringBehaviorIDLE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />

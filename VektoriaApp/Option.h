@@ -7,6 +7,8 @@ class Option
 public:
 	enum Status { READY, PROGRESSING, PAUSED, FINISHED, COOLDOWN };
 
+	virtual ~Option() {}
+
 	Option(std::string name) { m_name = name; };
 	Option(float dauer_sec = 0, float cooldown_sec = 0)
 		: m_dauer(dauer_sec), m_cooldown(cooldown_sec), m_status(READY) {
@@ -15,6 +17,7 @@ public:
 	virtual void Starten();
 	virtual void Stoppen();
 	virtual void Pausieren();
+	virtual void Update(float dt) {}
 
 	float m_dauer;
 	float m_originaldauer;

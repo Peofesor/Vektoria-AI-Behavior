@@ -35,10 +35,19 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	//m_zs.SetSkyFlowOn(2000);
 
 	// Plane Größe
-	const float planeSize = 25.0f;
+	float planeSize = 25.0f;
 	m_pPlane.AddGeo(&m_gPlane);
 	m_gPlane.Init(planeSize * 2, planeSize, nullptr);
 	m_pPlane.TranslateZ(-90.0f);
+
+	// Sleep Place Plane Größe
+	m_zmSleepPlane.Translate(CColor(1.0f, 1.0f, 0.0f));
+
+	planeSize = 2.5f;
+	m_pSleepPlane.AddGeo(&m_gSleepPlane);
+	m_gSleepPlane.Init(planeSize, planeSize, &m_zmSleepPlane);
+	m_pSleepPlane.Translate(10,10,-80);
+	
 
 	// Target
 	m_pTarget.AddGeo(&m_gTarget);
@@ -77,6 +86,7 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 
 	// Plane
 	m_zs.AddPlacement(&m_pPlane);
+	m_zs.AddPlacement(&m_pSleepPlane);
 
 	float gridSizeX = 50.0f;
 	float gridSizeY = 25.0f;
@@ -146,39 +156,65 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	m_zs.AddPlacement(&testNpc);
 	testNpc.SetColor(CColor(0.0f, 1.0f, 0.0f));
 
+
+
+	// Sleep Position erstellen
+	m_sleepPosition = new KnowledgePosition();
+	m_sleepPosition->SetPosition(CHVector(10.0f, 10.0f, 0.0f)); // Schlafpunkt
+
+	// Hunt Target (z.B. Spielerposition)
+	m_huntTarget = new KnowledgePosition();
+	m_huntTarget->SetPosition(CHVector(0.0f, 0.0f, 0.0f)); // Wird dynamisch aktualisiert
+
+	// Steering Behaviors erstellen
+	m_seekSleep = new SteeringBehaviorKinematicSEEK();
+	m_seekSleep->setTarget(m_sleepPosition);
+
+	m_seekHunt = new SteeringBehaviorKinematicSEEK();
+	m_seekHunt->setTarget(m_huntTarget);
+
+	//m_wander = new SteeringBehaviorKinematicWANDER();
+	//m_wander->setWanderStrength(0.5f);
+	//m_wander->setChangeInterval(2.0f);
+
+	m_wander = new SteeringBehaviorDynamicWANDER();
+	m_wander->setWanderRadius(5.0f);    // Wie groß sind die Kurven?
+	m_wander->setWanderDistance(20.0f); // Wie weit voraus wird gezielt? (Kleiner = wendiger)
+	m_wander->setWanderJitter(0.2f);    // Wie stark zappelt das Ziel? (Größer = chaotischer)
+
+	// Options mit Steering Behaviors erstellen
+	OptionSteeringBehavior* optionSleep = new OptionSteeringBehavior("Schlafen", m_seekSleep, &testNpc);
+	OptionSteeringBehavior* optionHunt = new OptionSteeringBehavior("Jagen", m_seekHunt, &testNpc);
+	OptionSteeringBehavior* optionWander = new OptionSteeringBehavior("Wandern", m_wander, &testNpc);
 	
 	// ==========================================
 	// ZOMBIE ENTSCHEIDUNGSBAUM BAUEN
 	// ==========================================
 
 	// 1. Daten init
-	m_isDay = false; // Start bei Nacht
+	m_isDay = true; // Start bei Tag
 
 	// 2. Optionen erstellen (Text + Dauer)
-	// Wir nutzen hier ZombieOption, damit der Name ausgegeben wird
-	m_optSleep = new ZombieOption("SCHLAFEN", 2.0f);
-	m_optHunt = new ZombieOption("JAGEN", 1.0f);
-	m_optWander = new ZombieOption("WANDERN", 3.0f);
+	//// Wir nutzen hier ZombieOption, damit der Name ausgegeben wird
+	//m_optSleep = new ZombieOption("SCHLAFEN", 2.0f);
+	//m_optHunt = new ZombieOption("JAGEN", 1.0f);
+	//m_optWander = new ZombieOption("WANDERN", 3.0f);
+	//
+	//m_leafSleep->m_option = m_optSleep;
+	//m_leafHunt->m_option = m_optHunt;
+	//m_leafWander->m_option = m_optWander;
 
 	// 3. OptionNodes (Blätter) erstellen
-	m_leafSleep = new OptionNodeDT();
-	m_leafSleep->isALeaf = true;
-	m_leafSleep->m_option = m_optSleep;
-
-	m_leafHunt = new OptionNodeDT();
-	m_leafHunt->isALeaf = true;
-	m_leafHunt->m_option = m_optHunt;
-
-	m_leafWander = new OptionNodeDT();
-	m_leafWander->isALeaf = true;
-	m_leafWander->m_option = m_optWander;
+	m_leafSleep = new OptionNodeDT(optionSleep);
+	m_leafHunt = new OptionNodeDT(optionHunt);
+	m_leafWander = new OptionNodeDT(optionWander);
 
 	// 4. Considerations (Logik-Prüfer) erstellen
 	m_condDay = new ConsiderationIsDay(&m_isDay);
 
 	// Prüft Distanz zwischen Zombie (testNpc) und Ziel (Target)
 	// Grenzwert 15 Einheiten
-	m_condNear = new ConsiderationPlayerNear(&testNpc, &m_pTarget, 15.0f);
+	m_condNear = new ConsiderationPlayerNear(&testNpc, &m_pTarget, 20.0f);
 
 	// 5. Entscheidungs-Knoten verknüpfen
 	// -- Check 2: Ist Spieler nah? (Nur relevant wenn Nacht)
@@ -201,9 +237,14 @@ void CGame::Tick(float fTime, float fTimeDelta)
 {
 	option.Update(fTimeDelta);
 
+	// Update hunt target mit Spielerposition
+	m_huntTarget->SetPosition(m_pTarget.GetPos());
+
 	// Knowledge Updaten
 	CHVector targetPos = m_pTarget.GetPos();
 	m_knowledgePosition.SetPosition(targetPos);
+
+	testNpc.Tick(fTimeDelta);
 
 	// NPCs updaten
 	if (m_kinematicsActive)
@@ -386,13 +427,17 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	{
 		for (Option* opt : *decisions)
 		{
-			// Casten auf unsere PrintOption
 			ZombieOption* zOpt = dynamic_cast<ZombieOption*>(opt);
 			if (zOpt)
 			{
 				zOpt->Starten();
+				zOpt->Update(fTimeDelta);
 			}
-			zOpt->Update(fTimeDelta);
+			else
+			{
+				opt->Starten();
+				opt->Update(fTimeDelta);
+			}
 		}
 
 		delete decisions;

@@ -42,7 +42,7 @@ public:
     // Konstruktor erwartet Pointer auf die bool Variable im Game
     ConsiderationIsDay(bool* dayRef) : ConsiderationBoolean(nullptr), m_pIsDayRef(dayRef) {}
 
-    bool compute() override // override falls in Basisklasse virtual
+    bool compute() override
     {
         if (m_pIsDayRef) return *m_pIsDayRef;
         return false;

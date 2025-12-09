@@ -13,6 +13,5 @@ public:
 	void Pausieren();
 	void Update(float dt);
 
-	std::string m_name;
-};
+};	
 

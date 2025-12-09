@@ -97,17 +97,21 @@ void Npc::SetColor(CColor color)
 
 void Npc::SetSteeringBehavior(SteeringBehavior* sb)
 {
+	//printf("SetSteeringBehavior: sb=%p, old=%p\n", sb, m_steeringBehavior);
+
 	if (!sb)
 		return;
 
-	//// Alte pos kopieren
-	//auto pos = GetKinematics()->GetPosition();
+	if (sb == m_steeringBehavior)
+	{
+		return;
+	}
+
 	
-	delete m_steeringBehavior;
+	//delete m_steeringBehavior;
 	m_steeringBehavior = sb;
 
-	//// Pos wieder setzten
-	//GetKinematics()->SetPosition(pos);
+	//printf(" -> new=%p\n", m_steeringBehavior);
 
 	// Kinematics zuweisen
 	m_steeringBehavior->setKinematics(&m_kinematics);

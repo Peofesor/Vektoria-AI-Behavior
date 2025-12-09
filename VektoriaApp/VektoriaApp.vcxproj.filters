@@ -108,6 +108,12 @@
     <ClInclude Include="SteeringBehaviorKinematicWANDER.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="OptionSteeringBehavior.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicWANDER.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -198,6 +204,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBehaviorKinematicWANDER.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionSteeringBehavior.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicWANDER.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
